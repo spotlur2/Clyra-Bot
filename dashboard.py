@@ -1,3 +1,4 @@
+# python -m streamlit run dashboard.py
 import streamlit as st
 import pandas as pd
 from main import run_pipeline
@@ -11,7 +12,7 @@ st.markdown("""
     <img src="https://pngimg.com/uploads/discord/discord_PNG27.png"
          width="50"
          style="background-color:transparent;">
-    Discord AutoMod Interactive Dashboard
+    Clyra Bot Interactive Dashboard
 </h1>
 """, unsafe_allow_html = True)
 
@@ -220,10 +221,12 @@ if st.session_state.history:
     history_rows = []
 
     action_display = {
-        "allow": "🟢 allow",
-        "warn": "🟡 warn",
-        "delete": "🔴 delete"
-    }
+    "allow": "🟢 allow",
+    "warn": "🟡 warn",
+    "delete": "🔴 delete",
+    "mute": "🟣 mute",
+    "ban": "⚫ ban"
+}
 
     for item in st.session_state.history:
         history_rows.append({
