@@ -3,6 +3,8 @@ import streamlit as st
 import pandas as pd
 import base64
 from main import run_pipeline
+import json
+from pathlib import Path
 
 # page title display
 st.set_page_config(page_title = "Clyra AutoMod Dashboard", layout = "wide")
@@ -252,3 +254,64 @@ if st.session_state.history:
 
 else:
     st.info("Type a Discord message in the bottom chat box to start.")
+
+# live Discord messages
+st.markdown("### 🌐 Live Discord Messages")
+
+LOG_FILE = Path("discord_messages.json")
+
+if LOG_FILE.exists():
+
+    with open(LOG_FILE, "r", encoding = "utf-8") as f:
+        discord_data = json.load(f)
+
+    if discord_data:
+
+        latest_discord = discord_data[0]
+
+        if st.button("Load latest Discord message into dashboard view"):
+            st.session_state.history.append({
+                "user_id": latest_discord["username"],
+                "message": latest_discord["message"],
+                "fused_output": latest_discord["fused_output"],
+                "decision": latest_discord["decision"],
+                "raw_outputs": latest_discord.get("raw_outputs", {})
+            })
+            st.rerun()
+            
+        for item in discord_data[:5]:
+
+            action = item["decision"].get("action", "unknown")
+            risk = item["decision"].get("risk_score", 0)
+
+            action_display = {
+                "allow": "🟢 allow",
+                "warn": "🟡 warn",
+                "delete": "🔴 delete",
+                "mute": "🟣 mute",
+                "ban": "⚫ ban"
+            }
+
+            st.markdown(
+                f"""
+                <div class="message-box">
+                    <b>{item['username']}</b>: {item['message']}
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+
+            st.write("Action:", action_display.get(action, action))
+            st.write("Risk Score:", round(float(risk), 3))
+            st.write("Reason:", item["decision"].get("reason", ""))
+
+            with st.expander("View fused output"):
+                st.json(item["fused_output"])
+
+            st.markdown("---")
+
+    else:
+        st.info("No Discord messages yet.")
+
+else:
+    st.info("discord_messages.json not found.")
