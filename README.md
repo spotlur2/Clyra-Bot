@@ -162,8 +162,8 @@ DISCORD_TOKEN=your_discord_bot_token
 ```
 
 Note:
-    -The .env file should not be uploaded to GitHub.
-    -You can obtain the Discord bot token from the Discord Developer Portal.
+- The .env file should not be uploaded to GitHub.
+- You can obtain the Discord bot token from the Discord Developer Portal.
 
 ---
 
