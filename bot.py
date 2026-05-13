@@ -7,6 +7,7 @@ from main import run_pipeline
 from collections import defaultdict
 from dotenv import load_dotenv
 load_dotenv()
+from discord_log import save_discord_result
 
 # setup
 intents = discord.Intents.default()
@@ -55,11 +56,6 @@ async def on_message(message):
 
     elif action == "warn":
         await message.channel.send(
-            f"⚠️ **Warning** {message.author.mention}: {reason} "
-        )
-
-    elif action == "warn":
-        await message.channel.send(
             f"⚠️ **Warning** {message.author.mention}: Please keep the conversation respectful."
         )
 
@@ -104,6 +100,14 @@ async def check(ctx, *, text):
     """Manually check a message: !check <message>"""
     result = run_pipeline(str(ctx.author.name), text, [])
     decision = result["decision"]
+
+    save_discord_result(
+        username = str(ctx.author.name),
+        message = text,
+        context = [],
+        result = result
+    )
+    
     await ctx.send(
         f"**Message:** `{text}`\n"
         f"**Action:** `{decision['action']}`\n"
