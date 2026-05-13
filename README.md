@@ -153,6 +153,20 @@ pip install -r requirements.txt
 
 ---
 
+## Step 3: Configure Discord Bot Token
+
+Create a `.env` file in the main project directory:
+
+```text
+DISCORD_TOKEN=your_discord_bot_token
+```
+
+Note:
+    -The .env file should not be uploaded to GitHub.
+    -You can obtain the Discord bot token from the Discord Developer Portal.
+
+---
+
 # Running the Project
 
 ## Run the Interactive Dashboard
