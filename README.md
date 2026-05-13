@@ -175,18 +175,18 @@ python bot.py
 ```
 If successful, the terminal should display:
 
-✅ Clyra Bot is online as ...
-Connected to ... server(s)
+    ✅ Clyra Bot is online as ...
+    Connected to ... server(s)
 
 The bot supports:
 
-automatic moderation for Discord messages
+    automatic moderation for Discord messages
 manual moderation testing using:
-!check <message>
+    !check <message>
 
 Example:
 
-!check you're trash lol
+    !check you're trash lol
 
 ## Run the Interactive Dashboard
 
@@ -203,6 +203,8 @@ python -m streamlit run dashboard.py
 ```
 
 Then open the local Streamlit address shown in the terminal (usually http://localhost:8501).
+
+## Dashboard Features
 
 The dashboard allows users to:
 
