@@ -93,7 +93,9 @@ Dashboard Output
 ```text
 Clyra-Bot/
 │
+├── bot.py                    # Discord bot integration and commands
 ├── dashboard.py              # Streamlit moderation dashboard
+├── discord_log.py            # Saves Discord moderation results for dashboard display
 ├── main.py                   # Main NLP pipeline
 ├── fusion.py                 # Feature fusion module
 ├── decision_system.py        # Moderation decision logic
@@ -102,8 +104,12 @@ Clyra-Bot/
 ├── spam_behavioral.py        # Spam + behavioral analysis
 ├── evaluation.py             # Evaluation script
 ├── evaluation_data.json      # Evaluation dataset
-├── requirements.txt
-└── README.md
+├── requirements.txt          # Required Python packages
+├── README.md                 # Project documentation
+│
+├── .env                      # Discord bot token (not uploaded to GitHub)
+├── .gitignore                # Files to exclude from GitHub
+└── discord_messages.json     # Generated Discord message log (not uploaded to GitHub)
 ```
 
 ---
@@ -123,6 +129,8 @@ Clyra-Bot/
 - pandas
 - numpy
 - scikit-learn
+- discord.py
+- python-dotenv
 
 ---
 
