@@ -169,7 +169,28 @@ Note:
 
 # Running the Project
 
+## Run the Discord Bot
+```bash
+python bot.py
+```
+If successful, the terminal should display:
+
+✅ Clyra Bot is online as ...
+Connected to ... server(s)
+
+The bot supports:
+
+automatic moderation for Discord messages
+manual moderation testing using:
+!check <message>
+
+Example:
+
+!check you're trash lol
+
 ## Run the Interactive Dashboard
+
+Open another terminal:
 
 ```bash
 streamlit run dashboard.py
@@ -185,11 +206,13 @@ Then open the local Streamlit address shown in the terminal (usually http://loca
 
 The dashboard allows users to:
 
-- Enter Discord messages
+- Enter Discord messages manually
 - Add context messages
 - View moderation decisions
 - Analyze feature scores
-- Inspect risk explanations
+- Inspect fused outputs and risk explanations
+- View live Discord moderation logs
+- Load Discord messages directly into the moderator analysis dashboard
 
 ---
 
