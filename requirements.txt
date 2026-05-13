@@ -6,3 +6,4 @@ numpy
 scikit-learn
 discord.py
 python-dotenv
+streamlit-autorefresh

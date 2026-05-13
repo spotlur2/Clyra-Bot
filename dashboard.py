@@ -9,6 +9,9 @@ from pathlib import Path
 # page title display
 st.set_page_config(page_title = "Clyra AutoMod Dashboard", layout = "wide")
 
+from streamlit_autorefresh import st_autorefresh
+st_autorefresh(interval=2000)  # refresh every 2 seconds
+
 # load a Clyra logo
 def get_base64_image(image_path):
     with open(image_path, "rb") as img:
@@ -269,7 +272,12 @@ if LOG_FILE.exists():
 
         latest_discord = discord_data[0]
 
-        if st.button("Load latest Discord message into dashboard view"):
+        #auto load latest message
+        last_seen = st.session_state.get("last_seen_message", None)
+        latest_msg = latest_discord["message"]
+
+        if latest_msg != last_seen:
+            st.session_state.last_seen_message = latest_msg
             st.session_state.history.append({
                 "user_id": latest_discord["username"],
                 "message": latest_discord["message"],
