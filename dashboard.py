@@ -1,18 +1,26 @@
 # python -m streamlit run dashboard.py
 import streamlit as st
 import pandas as pd
+import base64
 from main import run_pipeline
 
 # page title display
-st.set_page_config(page_title="Discord AutoMod Dashboard", layout="wide")
+st.set_page_config(page_title = "Clyra AutoMod Dashboard", layout = "wide")
 
-# Header of the dashboard with Discord icon
-st.markdown("""
+# load a Clyra logo
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img:
+        return base64.b64encode(img.read()).decode()
+
+logo_base64 = get_base64_image("Clyra_logo.png")
+
+# Header of the dashboard with Clyra icon
+st.markdown(f"""
 <h1 style="display:flex; align-items:center; gap:12px;">
-    <img src="https://pngimg.com/uploads/discord/discord_PNG27.png"
-         width="50"
-         style="background-color:transparent;">
-    Clyra Bot Interactive Dashboard
+    <img src = "data:image/png;base64,{logo_base64}"
+         width = "120"
+         style = "background-color:transparent;">
+    Clyra-bot Interactive Dashboard
 </h1>
 """, unsafe_allow_html = True)
 

@@ -272,15 +272,16 @@ The moderation system was evaluated using a labeled dataset containing:
 - spam messages
 - contextual banter examples
 
-## Evaluation Metrics
+The baseline system uses rule-based keyword filtering and spam pattern matching without contextual understanding, sentiment analysis, or feature fusion.
 
-```text
-Accuracy: 66.67%
+## Overall Results
 
-Macro Average F1-score: 0.6187
-Weighted Average F1-score: 0.6518
-```
-## Per-Class Performance
+|             System           |  Accuracy | 
+|------------------------------|-----------|
+| Baseline Rule-Based System   |   76.67%  |   
+| Clyra-Bot                    |   66.67%  | 
+
+## Clyra-Bot Per-Class Performance
 
 | Action  | Precision | Recall | F1-score |
 |---------|-----------|--------|----------|
@@ -290,24 +291,43 @@ Weighted Average F1-score: 0.6518
 | Mute    |   1.0000  | 0.2500 |  0.4000  |
 | Ban     |   1.0000  | 0.4000 |  0.5714  |
 
+## Additional Metrics
+```text
+Accuracy: 66.67%
+
+Macro Average F1-score: 0.6187
+Weighted Average F1-score: 0.6518
+```
+
 ## Observations
 
-The system performed best on:
-- toxic message detection
-- delete-level moderation
-- explicit spam detection
+The baseline system achieved higher overall accuracy because it relied on direct keyword matching and fixed moderation rules. However, the baseline system could not handle nuanced moderation actions such as contextual warnings and often produced strict moderation decisions.
 
-Some contextual and severe threat examples remain challenging due to:
-- sarcasm ambiguity
-- contextual interpretation
-- indirect threats
-- conversational banter
+Clyra-bot performed better on many contextual moderation examples involving joking or conversational banter. For example, messages such as:
+
+    "you're trash lol"
+    "idiot haha"
+
+were handled more appropriately by the contextual moderation system compared to the baseline system.
+
+The system performed best on:
+  - toxic message detection
+  - delete-level moderation
+  - contextual warning detection
+  - explicit toxic language
+
+Some severe threat and spam examples remain challenging due to:
+  - sarcasm ambiguity
+  - contextual interpretation
+  - indirect threats
+  - spam threshold tuning
+  - conversational banter
 
 ## Future improvements may include:
 - larger labeled datasets
 - fine-tuned moderation models
 - stronger contextual memory
-- improved threat detection
+- improved spam or phishing detection
 - user behavior tracking across longer conversations
 
 ---
